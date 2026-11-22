@@ -100,6 +100,23 @@ python -I bios/pack_bios.py --extract <x3 bios.bin> <out.xbe>          # unpack
 
 The comment on each function and global gives its address in the original 4026 image.
 
+## Credits
+
+This rebuild is based on **[Sick-Git](https://github.com/Sick-Git)'s Config Live 4026**
+([Xecuter-3-Config-Live-XBOX-App](https://github.com/Sick-Git/Xecuter-3-Config-Live-XBOX-App)),
+which took the X3's 3294 Config Live, reverse engineered it and turned it into an HDD app.
+Its patches are all carried over into this source:
+
+- flash chip ID patches for AMD / Fujitsu (main flash IDs 01 and 04), and the 256 KB backup flash
+  ID check cleared so any suitably structured backup chip works (the original EON X3 backup chip
+  is long gone)
+- the CPLD X3 chip detection removed, so it boots from any BIOS
+- the config read / write dispatch (the D3D code cave) and the write wrapper with auto-load
+- config persistence: settings are saved to and loaded from a file
+- an HDD access fix
+- the X3 3294 clock bug in the year 2020 fixed; the default date is now January 2026 (your own
+  settings stay once saved)
+
 ## Status
 
 The XBE runs the whole app in xemu, screen for screen like the original. Not tested on purpose:
