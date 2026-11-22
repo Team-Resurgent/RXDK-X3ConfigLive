@@ -38,7 +38,8 @@ rm -f "$OUT/ConfigLive.exe" "$OUT/ConfigLive.xbe" "$OUT/X3_ConfigLive_2MB.bin"
 
 T="-target i686-pc-windows-gnu -march=pentium3"
 CFLAGS="${EXTRA_CFLAGS:-} -ffreestanding -fno-builtin -fno-stack-protector -O2 -Wall -Iinclude"
-mapfile -t SDKFLAGS < <("$CLI" compile-args --lang c | tr -d '\r')
+SDKFLAGS=() # (a read loop, not mapfile: macOS ships bash 3.2)
+while IFS= read -r f; do SDKFLAGS+=("$f"); done < <("$CLI" compile-args --lang c | tr -d '\r')
 
 OBJS=()
 while IFS= read -r src; do
