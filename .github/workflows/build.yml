@@ -1,9 +1,9 @@
 name: Build X3 Config Live
 
-# Builds Config Live against the latest RXDK (clang, SDK, host tools) on Windows and
-# packs it into the X3 BIOS image, then publishes the same rolling "latest" release the
-# RXDK repos use: a push to main deletes and recreates the latest tag so /releases/latest
-# is always this build. A v* tag is a fixed release. workflow_dispatch with release_tag is a
+# Builds Config Live against the latest RXDK (clang, SDK, host tools) on Windows, Linux and
+# macOS and packs it into the X3 BIOS image, then publishes the Windows build as the same
+# rolling "latest" release the RXDK repos use: a push to main deletes and recreates the
+# latest tag so /releases/latest is always this build. A v* tag is a fixed release. workflow_dispatch with release_tag is a
 # prerelease. Pull requests build and upload artifacts, and do not publish.
 
 on:
@@ -28,8 +28,15 @@ concurrency:
 
 jobs:
   build:
-    name: Build (Windows)
-    runs-on: windows-latest
+    name: Build (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {name: Windows, os: windows-latest}
+          - {name: Linux, os: ubuntu-latest}
+          - {name: macOS, os: macos-latest}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,12 +51,16 @@ jobs:
         with:
           python-version: '3.12'
 
+      # 7-Zip's deflate packs the BIOS: preinstalled on the Windows and Linux runners
+      - name: Install 7-Zip (macOS)
+        if: runner.os == 'macOS'
+        run: brew install sevenzip
+
       - name: Stage RXDK clang, SDK, and host tools
         shell: pwsh
         run: ./scripts/stage-rxdk.ps1
 
       # build.sh: the XBE, then bios/pack_bios.py packs it into the X3 image
-      # (7-Zip's deflate; 7-Zip is preinstalled on the Windows runners).
       - name: Build
         shell: bash
         run: |
@@ -66,10 +77,11 @@ jobs:
           mkdir -p dist
           cp out/ConfigLive.xbe out/X3_ConfigLive_2MB.bin dist/
 
+      # every OS builds; the release takes the Windows build
       - name: Upload build
         uses: actions/upload-artifact@v4
         with:
-          name: x3configlive
+          name: x3configlive-${{ matrix.name }}
           path: dist/*
           if-no-files-found: error
           retention-days: 90
@@ -90,7 +102,7 @@ jobs:
       - name: Download build
         uses: actions/download-artifact@v4
         with:
-          name: x3configlive
+          name: x3configlive-Windows
           path: dist
 
       - name: Resolve release tag

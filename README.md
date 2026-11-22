@@ -33,10 +33,21 @@ ones. No original code or data is linked in.
 
 ## Requirements
 
-- RXDK at `C:\ProgramData\RXDK` (or set `RXDK`): clang in `llvm\`, the SDK in `sdk\`, `Rxdk.Cli` and
-  `imagebld` in `tools\`. `scripts/stage-rxdk.ps1` downloads and lays them out, as CI does.
-- Bash (Git Bash on Windows) and Python 3
-- [7-Zip](https://www.7-zip.org/) at `C:\Program Files\7-Zip\7z.exe` (or set `SEVENZIP`), for the BIOS image
+Windows, Linux or macOS, with:
+
+- **RXDK** (clang, the SDK, `Rxdk.Cli` and `imagebld`) where RXDK installs itself:
+
+  | OS | RXDK root |
+  |---|---|
+  | Windows | `%ProgramData%\RXDK` |
+  | macOS | `~/Library/Application Support/RXDK` |
+  | Linux | `$XDG_DATA_HOME/rxdk` (`~/.local/share/rxdk`) |
+
+  Set `RXDK` to use another root. The RXDK VS Code / Visual Studio setup installs it, or run
+  `pwsh scripts/stage-rxdk.ps1`, which downloads and lays it out as CI does.
+- **Bash** (Git Bash on Windows) and **Python 3**
+- **[7-Zip](https://www.7-zip.org/)** for the BIOS image: `7z`, `7zz` or `7za` on `PATH`, the Windows default
+  install, or `SEVENZIP`
 
 ## Build
 
@@ -49,8 +60,9 @@ ones. No original code or data is linked in.
 | `out/ConfigLive.xbe` | Config Live as a normal XBE |
 | `out/X3_ConfigLive_2MB.bin` | `bios/X3_3294_2MB.bin` with this Config Live in its flash slot |
 
-Every push to `main` builds both on GitHub Actions and publishes them as the rolling `latest`
-release; a `v*` tag makes a fixed release. `RX_OUT=<dir>` builds somewhere else; `EXTRA_CFLAGS` adds defines. Debug switches:
+Every push to `main` builds on GitHub Actions (Windows, Linux and macOS) and publishes both files
+as the rolling `latest` release; a `v*` tag makes a fixed release. `RX_OUT=<dir>` builds
+somewhere else; `EXTRA_CFLAGS` adds defines. Debug switches:
 `-DRX_TRACE_MAIN` (start-up markers on the COM1 UART), `-DRX_DEBUG_NONET` (no network thread),
 `-DRX_DEBUG_NOSAVECFG` (no XNet config writes).
 
@@ -116,9 +128,3 @@ Its patches are all carried over into this source:
 - an HDD access fix
 - the X3 3294 clock bug in the year 2020 fixed; the default date is now January 2026 (your own
   settings stay once saved)
-
-## Status
-
-The XBE runs the whole app in xemu, screen for screen like the original. Not tested on purpose:
-skin download (the skin site is offline), FTP data transfers, the ISO browser and flashing. The
-packed BIOS image has not been boot-tested yet.

@@ -16,6 +16,7 @@ about 4% smaller) is wrapped in a zlib header + Adler-32. Both are plain deflate
 result is always decompressed again and compared with the XBE.
 """
 import os
+import shutil
 import struct
 import subprocess
 import sys
@@ -29,7 +30,18 @@ STREAM = 0x5200
 SLOT_END = 0x73EEE
 SLOT = SLOT_END - STREAM
 VERSION = 0xCDE
-SEVENZIP = os.environ.get('SEVENZIP', 'C:/Program Files/7-Zip/7z.exe')
+def find_7zip():
+    """SEVENZIP, else 7z / 7zz / 7za on PATH, else the Windows default install."""
+    if os.environ.get('SEVENZIP'):
+        return os.environ['SEVENZIP']
+    for name in ('7z', '7zz', '7za'):
+        p = shutil.which(name)
+        if p:
+            return p
+    return 'C:/Program Files/7-Zip/7z.exe'
+
+
+SEVENZIP = find_7zip()
 
 
 def rc4(key, data):
@@ -87,8 +99,8 @@ def pack(img1, xbe):
     if len(cands[0][1]) > SLOT:
         z7 = deflate_7z(xbe)
         if z7 is None:
-            sys.exit(f'zlib -9 gives 0x{len(cands[0][1]):X} bytes, slot is 0x{SLOT:X}, and 7-Zip '
-                     f'is not at {SEVENZIP} (set SEVENZIP)')
+            sys.exit(f'zlib -9 gives 0x{len(cands[0][1]):X} bytes, slot is 0x{SLOT:X}, and no 7-Zip '
+                     f'was found (install 7-Zip / p7zip, or set SEVENZIP)')
         cands.append(('7-Zip deflate', z7))
     how, z = min(cands, key=lambda c: len(c[1]))
     if zlib.decompress(z) != xbe:
