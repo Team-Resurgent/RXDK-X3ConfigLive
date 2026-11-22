@@ -114,10 +114,9 @@ The comment on each function and global gives its address in the original 4026 i
 
 ## Credits
 
-This rebuild is based on **[Sick-Git](https://github.com/Sick-Git)'s Config Live 4026**
-([Xecuter-3-Config-Live-XBOX-App](https://github.com/Sick-Git/Xecuter-3-Config-Live-XBOX-App)),
-which took the X3's 3294 Config Live, reverse engineered it and turned it into an HDD app.
-Its patches are all carried over into this source:
+Thanks to **[Sick-Git](https://github.com/Sick-Git)** for the patches in his Config Live 4026
+([Xecuter-3-Config-Live-XBOX-App](https://github.com/Sick-Git/Xecuter-3-Config-Live-XBOX-App)).
+They are all carried over into this source:
 
 - flash chip ID patches for AMD / Fujitsu (main flash IDs 01 and 04), and the 256 KB backup flash
   ID check cleared so any suitably structured backup chip works (the original EON X3 backup chip
