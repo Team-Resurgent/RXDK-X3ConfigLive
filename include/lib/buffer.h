@@ -1,5 +1,5 @@
 /* lib/buffer: the 0x20-byte byte ring buffer used by the FTP transfer threads.
- * Owned by the lib/buffer module (src/lib/buffer.c). */
+ */
 #pragma once
 #include "types.h"
 

@@ -1,5 +1,5 @@
 /* hw/lcd: the X3's character LCD (HD44780, 4-bit bus behind the X3 CPLD ports 0xF504..0xF507).
- * Owned by cleanup group C_hw. */
+ */
 #pragma once
 #include "types.h"
 

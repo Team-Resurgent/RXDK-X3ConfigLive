@@ -1,4 +1,4 @@
-/* lib/misc: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* lib/misc: public interface. */
 #pragma once
 #include "types.h"
 

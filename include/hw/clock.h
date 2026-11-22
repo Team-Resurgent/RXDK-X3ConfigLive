@@ -1,4 +1,4 @@
-/* hw/clock: local time (format, set) and the time-zone bias. Owned by cleanup group C_hw. */
+/* hw/clock: local time (format, set) and the time-zone bias. */
 #pragma once
 #include "types.h"
 

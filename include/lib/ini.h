@@ -1,5 +1,5 @@
 /* lib/ini: "name = value" files (skin .ini) parsed into a singly linked name/value list.
- * Owned by the lib/ini module (src/lib/ini.c). */
+ */
 #pragma once
 #include "types.h"
 

@@ -1,4 +1,4 @@
-/* menus/password: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* menus/password: public interface. */
 #pragma once
 #include "types.h"
 

@@ -1,4 +1,4 @@
-/* ui/flashui: the flash progress and "done" screens. Owned by the ui/flashui module (src/ui/flashui.c). */
+/* ui/flashui: the flash progress and "done" screens. */
 #pragma once
 #include "types.h"
 

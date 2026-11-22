@@ -8,8 +8,7 @@
  * EepromGetCached fills), g_flash_busy (no confirmation prompts while scripts / flashing run),
  * X3Config fields g_eeprom_backup_time (+0xA4) and g_x3cfg_commit (+0x98).
  * EEPROM and setting writes are verified by booting only; the crypto, checksum and the
- * read-only cache load were checked against the original (differential tests, retired with the
- * hybrid build).
+ * read-only cache load were checked against the original function by function.
  */
 #include "app.h"
 

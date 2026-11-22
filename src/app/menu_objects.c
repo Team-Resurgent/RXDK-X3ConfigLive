@@ -4,7 +4,7 @@
  * The CRT's initializer table (0xEE16C) holds 77 compiler-generated functions (0x7E5C0..0x81EC0,
  * 181 bytes each, all the same shape) that run before AppMain: `g_menu_x = new Menu("name")`
  * (operator new(0x94), Menu_Construct(m, name) unless new failed, else NULL). The table order is
- * kept below (analysis/menu_inits.json). The name is passed to Menu_Construct, which ignores it.
+ * kept below. The name is passed to Menu_Construct, which ignores it.
  *
  * InitMenuObjects runs them all; main (src/sdk/x3_misc.c) calls it before AppMain.
  */

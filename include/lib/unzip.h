@@ -1,5 +1,5 @@
 /* lib/unzip: zip extraction (minizip's miniunz do_extract on top of unzip 0.21 in the image).
- * Owned by the lib/unzip module (src/lib/unzip.c). */
+ */
 #pragma once
 #include "types.h"
 

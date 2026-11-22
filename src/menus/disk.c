@@ -7,7 +7,7 @@
 #include "app.h"
 
 /* item callbacks (original addresses, see menus/items.h) */
-#define CB_CLEAR_CACHE ((u32)&ClearCachePartitions)  /* clear cache dirs / drives (original, not hooked) */
+#define CB_CLEAR_CACHE ((u32)&ClearCachePartitions)  /* clear cache dirs / drives */
 #define CB_TOGGLE_LOCK ((u32)&ToggleHddLock)  /* lock / unlock the HDD (original) */
 #define CB_FORMAT_ALL ((u32)&FormatAllDrives)   /* "Format All Drives/Partitions" (original) */
 #define CB_FORMAT_DRIVE ((u32)&FormatSelectedDrive) /* FormatSelectedDrive */

@@ -1,5 +1,5 @@
 /* fs/fat: FAT12/16/32 reader for memory units and FAT images (read-only, whole FAT in memory).
- * Owned by the fs cleanup group. Objects: FatDisk (0x164 bytes, new'd by AppMain), its directory
+ * Objects: FatDisk (0x164 bytes, new'd by AppMain), its directory
  * tree of FatNode, and FatFile (open file with a 512 KB read buffer). */
 #pragma once
 #include "types.h"

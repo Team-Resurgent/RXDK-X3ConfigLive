@@ -1,5 +1,5 @@
 /* hw/smc: the system management controller (SMBus 0x20: LEDs, fan, reset, version), the
- * temperature sensor (SMBus 0x99), board/encoder detection. Owned by cleanup group C_hw. */
+ * temperature sensor (SMBus 0x99), board/encoder detection. */
 #pragma once
 #include "types.h"
 

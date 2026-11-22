@@ -1,4 +1,4 @@
-/* fs/files: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* fs/files: public interface. */
 #pragma once
 #include "types.h"
 

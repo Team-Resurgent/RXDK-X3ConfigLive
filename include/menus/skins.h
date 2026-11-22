@@ -1,4 +1,4 @@
-/* menus/skins: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* menus/skins: public interface. */
 #pragma once
 #include "types.h"
 

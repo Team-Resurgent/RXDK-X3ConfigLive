@@ -1,4 +1,4 @@
-/* menus/disk: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* menus/disk: public interface. */
 #pragma once
 #include "types.h"
 

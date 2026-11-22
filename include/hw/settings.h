@@ -1,5 +1,5 @@
 /* hw/settings: X3 configuration writes and the encrypted X3 settings block.
- * Owned by cleanup group C_hw. */
+ */
 #pragma once
 #include "types.h"
 

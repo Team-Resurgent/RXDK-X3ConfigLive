@@ -1,5 +1,5 @@
 /* lib/sha1: RFC 3174 SHA-1 (the reference SHA1Context code, as methods of an unused object).
- * Owned by the lib/sha1 module (src/lib/sha1.c). */
+ */
 #pragma once
 #include "types.h"
 

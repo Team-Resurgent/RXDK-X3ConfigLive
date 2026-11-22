@@ -1,4 +1,4 @@
-/* net/http: public interface. GENERATED, then owned by the module's cleanup agent (group E). */
+/* net/http: public interface. */
 #pragma once
 #include "types.h"
 #include "net/net.h"

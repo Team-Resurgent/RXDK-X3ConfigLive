@@ -1,4 +1,4 @@
-/* hw/x3port: the X3 modchip's CPLD I/O ports. Owned by cleanup group C_hw. */
+/* hw/x3port: the X3 modchip's CPLD I/O ports. */
 #pragma once
 #include "types.h"
 

@@ -1,6 +1,6 @@
 /* net: types shared by the network modules (net/ftp, net/http, net/netcfg).
  * Winsock / XNet structures as the Xbox XDK (5849) lays them out, and the file-writer job the
- * HTTP downloader and FTP STOR hand to the writer thread 0x1AC80. Owned by cleanup group E. */
+ * HTTP downloader and FTP STOR hand to the writer thread 0x1AC80. */
 #pragma once
 #include "types.h"
 

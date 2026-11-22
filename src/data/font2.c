@@ -1,4 +1,4 @@
-/* GENERATED from the original .rdata (0xE0790, 0x14C4 bytes): the bitmap font AppMain opens with
+/* From the original .rdata (0xE0790, 0x14C4 bytes): the bitmap font AppMain opens with
  * XFONT_OpenBitmapFontFromMemory as g_font2 (the menus' small font). */
 typedef unsigned char u8;
 

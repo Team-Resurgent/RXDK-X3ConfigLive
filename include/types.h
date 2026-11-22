@@ -1,5 +1,4 @@
-/* Types shared between Config Live modules. Owned by the integrator; cleanup agents propose
- * changes (new shared structs, field names) in their reports. Layouts are the original's. */
+/* Types shared between Config Live modules. Layouts are the original's. */
 #pragma once
 
 /* base types, start-up self tests, the UART log, exact float constants.
@@ -77,7 +76,7 @@ _Static_assert(sizeof(WIN32_FIND_DATAA) == 0x140, "WIN32_FIND_DATAA size");
 
 /* Menus (ui/menu, the engine is Menu_Run 0x22C70). An item is a FileList node (0x70 bytes);
  * a menu starts with the same node layout, its +0x6C "next" slot being the list head.
- * Field names: owned by ui/menu (cleanup group G); other groups use them as they are. */
+ * Field names: those of ui/menu. */
 struct Menu;
 typedef struct MenuItem {
     char name[0x40];         /* +0x00 */

@@ -496,19 +496,6 @@ int __thiscall Menu_Run(Menu *self)
     }
     g_frame_bottom = (int)y;
 
-#ifdef RX_SCRIPT_TRACE /* debugging a stuck tour: Menu_Run is running, and the pad lock */
-    {
-        static u32 beat;
-        if (orig_GetTickCount() - beat >= 2000) {
-            beat = orig_GetTickCount();
-            uart_puts("[menu] run lock ");
-            uart_hex((u32)g_pad_lock);
-            uart_puts(" menu ");
-            uart_hex((u32)self);
-            uart_puts("\r\n");
-        }
-    }
-#endif
     if (!g_pad_lock) {
         g_pad_raw = PollGamepadButtons();
         if (g_pad_raw) {

@@ -1,4 +1,4 @@
-/* hw/pad: gamepads (XInput). Owned by cleanup group C_hw. */
+/* hw/pad: gamepads (XInput). */
 #pragma once
 #include "types.h"
 

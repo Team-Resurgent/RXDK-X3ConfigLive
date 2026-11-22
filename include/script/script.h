@@ -1,5 +1,5 @@
 /* script/script: the X3 script interpreter (X3_script.ini / X3_auto_script.ini, DVD and
- * network scripts). Owned by the script/script module (src/script/script.c). */
+ * network scripts). */
 #pragma once
 #include "types.h"
 

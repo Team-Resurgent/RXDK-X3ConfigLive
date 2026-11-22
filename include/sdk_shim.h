@@ -1,6 +1,6 @@
-/* Standalone build (RX_STANDALONE): the library entry points that tools/sdk_map.py could not link
- * straight to an RXDK-SDK symbol. Implemented in src/sdk/ (sdk_*.c with the SDK headers, x3_*.c
- * with this project's), declared here with this project's types. */
+/* The library entry points that do not link straight to an RXDK-SDK symbol. Implemented in
+ * src/sdk/ (sdk_*.c with the SDK headers, x3_*.c with this project's), declared here with this
+ * project's types. */
 #pragma once
 #include "types.h"
 

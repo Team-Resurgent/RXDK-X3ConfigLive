@@ -62,9 +62,15 @@ Windows, Linux or macOS, with:
 
 Every push to `main` builds on GitHub Actions (Windows, Linux and macOS) and publishes both files
 as the rolling `latest` release; a `v*` tag makes a fixed release. `RX_OUT=<dir>` builds
-somewhere else; `EXTRA_CFLAGS` adds defines. Debug switches:
-`-DRX_TRACE_MAIN` (start-up markers on the COM1 UART), `-DRX_DEBUG_NONET` (no network thread),
-`-DRX_DEBUG_NOSAVECFG` (no XNet config writes).
+somewhere else; `EXTRA_CFLAGS` adds defines, e.g. `EXTRA_CFLAGS=-DRX_TRACE_MAIN ./build.sh`.
+
+| Switch | Does |
+|---|---|
+| `RX_TRACE_MAIN` | numbered start-up markers on the COM1 UART (xemu `-serial stdio`) |
+| `RX_DEBUG_NONET` | no network thread |
+| `RX_TEST_FORCE_R3MUX` | show the R3mux LCD contrast item (xemu has no R3mux) |
+| `RX_TEST_FORCE_DHCP` | boot in DHCP mode (xemu NAT, no saved X3 config) |
+| `RX_TEST_NAT_STATIC` | static IP 10.0.2.15, the address xemu's NAT port forwards reach |
 
 ## The BIOS image
 

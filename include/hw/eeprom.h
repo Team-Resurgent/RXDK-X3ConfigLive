@@ -1,5 +1,5 @@
 /* hw/eeprom: the Xbox EEPROM image, its security-section crypto and checksums, and the X3
- * EEPROM backup. Owned by cleanup group C_hw. Layouts are the standard Xbox EEPROM ones, as
+ * EEPROM backup. Layouts are the standard Xbox EEPROM ones, as
  * the users in this app access them. */
 #pragma once
 #include "types.h"

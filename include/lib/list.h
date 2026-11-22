@@ -1,6 +1,6 @@
 /* lib/list: the menu/file item list (FileList_Add on a Menu, see types.h), a small
  * tagged-text node list (the memory-unit list), and the Vec3 / Vec4 constructors.
- * Owned by the lib/list module (src/lib/list.c). */
+ */
 #pragma once
 #include "types.h"
 

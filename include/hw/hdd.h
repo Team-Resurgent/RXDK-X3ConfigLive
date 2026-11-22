@@ -1,5 +1,5 @@
 /* hw/hdd: hard disk / DVD drive access: ATA IDENTIFY, HDD security (lock password), the HDD key,
- * raw sector I/O and formatting. Owned by the hw/hdd module (src/hw/hdd.c). */
+ * raw sector I/O and formatting. */
 #pragma once
 #include "types.h"
 

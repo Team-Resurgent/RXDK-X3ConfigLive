@@ -205,7 +205,7 @@ static NOINLINE void Main_BuildMenus(void)
 extern const u8 g_font2_data[0x14C4]; /* src/data/font2.c (the original's .rdata 0xE0790) */
 
 /* 0x2B340  void __cdecl AppMain(void)  (no callers: the XAPI startup calls it)
- * Init: XInitDevices(0, 0), OpenGamepads (runs the RX_LATE_TESTs on its first call),
+ * Init: XInitDevices(0, 0), OpenGamepads (runs the late self tests on its first call),
  * InstallConfigDispatch, config 0x2E (LCD enable) into a local, LoadX3SettingsBlock; LCD on:
  * config 0x33 -> 0x160DF0, LcdInitLayout, LcdInit, LcdClear, "     XECUTER 3" at (0, 0),
  * the LCD message 0x163C1F at (0, 2). Flash byte 0xFFF00078 (MmMapIoSpace 4, 0x204) low byte

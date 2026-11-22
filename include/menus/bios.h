@@ -1,4 +1,4 @@
-/* menus/bios: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* menus/bios: public interface. */
 #pragma once
 #include "types.h"
 

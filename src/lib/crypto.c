@@ -2,7 +2,7 @@
  * No module data structures. RC4 itself is the XDK's XcRC4Key / XcRC4Crypt. */
 #include "app.h"
 
-/* XDK crypto (xboxkrnl Xc* thunks, analysis/names.json) */
+/* XDK crypto (the xboxkrnl Xc* exports) */
 
 static const u8 g_rc4_key[0x10] = {0x70, 0x6F, 0x2E, 0xB3, 0x66, 0x40, 0x7B, 0x32, 0xDF, 0x23, 0xA7, 0x31, 0x31, 0x3F, 0xB4, 0x21}; /* 0x119F28 16-byte RC4 key of the settings block */
 

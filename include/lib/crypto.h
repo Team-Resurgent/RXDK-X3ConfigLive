@@ -1,4 +1,4 @@
-/* lib/crypto: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* lib/crypto: public interface. */
 #pragma once
 #include "types.h"
 

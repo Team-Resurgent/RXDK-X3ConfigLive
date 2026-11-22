@@ -1,4 +1,4 @@
-/* menus/quicklaunch: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* menus/quicklaunch: public interface. */
 #pragma once
 #include "types.h"
 

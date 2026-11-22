@@ -1,5 +1,5 @@
-/* hw/flash: BIOS flash chip programming (JEDEC erase / program / verify, FlashImage). Owned by
- * the hw/flash module (src/hw/flash.c). Addresses passed are flash offsets (0xFF000000 + offset). */
+/* hw/flash: BIOS flash chip programming (JEDEC erase / program / verify, FlashImage).
+ * Addresses passed are flash offsets (0xFF000000 + offset). */
 #pragma once
 #include "types.h"
 

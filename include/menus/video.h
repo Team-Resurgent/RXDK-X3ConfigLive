@@ -1,4 +1,4 @@
-/* menus/video: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* menus/video: public interface. */
 #pragma once
 #include "types.h"
 

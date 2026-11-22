@@ -1,4 +1,4 @@
-/* ui/dialogs: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* ui/dialogs: public interface. */
 #pragma once
 #include "types.h"
 

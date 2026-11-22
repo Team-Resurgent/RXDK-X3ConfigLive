@@ -1,4 +1,4 @@
-/* menus/eeprom: public interface. GENERATED, then owned by the module's cleanup agent. */
+/* menus/eeprom: public interface. */
 #pragma once
 #include "types.h"
 

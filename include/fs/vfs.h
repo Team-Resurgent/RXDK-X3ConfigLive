@@ -1,6 +1,6 @@
 /* fs/vfs: ISO9660 / Joliet reader for the DVD drive (IsoVfs, 0xA54 bytes): directory tree,
  * find-first/next over a directory, open a file by path and read it sector-aligned.
- * Owned by the fs cleanup group. Object tag FS_KIND_ISO (fs/fat.h). */
+ * Object tag FS_KIND_ISO (fs/fat.h). */
 #pragma once
 #include "types.h"
 
