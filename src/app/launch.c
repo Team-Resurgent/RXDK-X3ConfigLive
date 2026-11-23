@@ -166,12 +166,40 @@ void __cdecl X3DebugPrint(const char *msg)
  * LaunchXbe(FormatPartitionPath(DriveLetterToPartition(g_drive 0x160D24), 0x160D38/0x160D48/
  * 0x160D58/0x160D68, buf)); else if 0x163B3B != "" and RT/LT (0x100/0x200) ->
  * LaunchXbe(FormatPartitionPath(byte 0x160DDC, 0x163B3B, buf)); else LaunchBootChain().
- * Polls the pads (consumes device changes): verified by booting only. */
+ * The XBE build keeps the 4026 patch. The BIOS build has the 3294 code: with autostart off,
+ * Config Live boots the dashboard (or a quick-launch XBE) unless White is held.
+ * Polls the pads (consumes device changes); launches XBEs: verified by booting only. */
 void __cdecl QuickLaunchButtons(void)
 {
     u32 buttons = PollGamepadButtons();
+#ifdef X3_BIOS_BUILD
+    char path[0x104];
+    u32 k;
+    if (buttons == PAD_WHITE) {
+        X3DebugPrint("white pressed\r\n");
+        return;
+    }
+    switch (buttons) {
+    case PAD_A: k = 1; break;
+    case PAD_B: k = 2; break;
+    case PAD_X: k = 3; break;
+    case PAD_Y: k = 4; break;
+    default: k = 0; break;
+    }
+    if (k) {
+        LaunchXbe(FormatPartitionPath((u32)DriveLetterToPartition(g_x3_config.boot_drive), g_x3_config.dash_name[k], path));
+        return;
+    }
+    const char *ql = (const char *)g_x3_settings.unk02 + 1; /* 0x163B3B */
+    if (orig_strcmp(ql, "") && (buttons == PAD_LT || buttons == PAD_RT)) {
+        LaunchXbe(FormatPartitionPath(g_x3_config.ql_drive, ql, path));
+        return;
+    }
+    LaunchBootChain();
+#else
     (void)buttons; /* compared against 0x400, but the branch was patched out */
     X3DebugPrint("white pressed\r\n");
+#endif
 }
 
 /* ---------------------------------------------------------------------------------------- */

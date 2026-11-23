@@ -58,7 +58,16 @@ Windows, Linux or macOS, with:
 | Output | What |
 |---|---|
 | `out/ConfigLive.xbe` | Config Live as a normal XBE |
-| `out/X3_ConfigLive_2MB.bin` | `bios/X3_3294_2MB.bin` with this Config Live in its flash slot |
+| `out/X3_ConfigLive_2MB.bin` | `bios/X3_3294_2MB.bin` with the BIOS build of Config Live in its flash slot |
+
+The two differ only where the settings live. The XBE keeps them in `E:\x3config.bin` (as Sick-Git's
+4026 does). The BIOS build (`X3_BIOS_BUILD`) uses the X3 kernel's own settings in the X3 EEPROM, as
+3294 did. The kernel reads those at boot, so the startup animation and the other boot settings take
+effect. With autostart off, Config Live boots the dashboard unless White is held: A / B / X / Y
+start dashboard 2 to 5, and LT / RT start the quick-launch XBE. The R3mux LCD contrast is
+not an X3 setting, so it stays in `E:\x3config.bin`. Without the X3 kernel's settings exports, the
+BIOS build falls back to the file. Only the sources that test `X3_BIOS_BUILD`
+(`src/hw/settings.c`, `src/app/launch.c`) are compiled twice.
 
 Every push to `main` builds on GitHub Actions (Windows, Linux and macOS) and publishes both files
 as the rolling `latest` release; a `v*` tag makes a fixed release. `RX_OUT=<dir>` builds
@@ -129,7 +138,8 @@ They are all carried over into this source:
   is long gone)
 - the CPLD X3 chip detection removed, so it boots from any BIOS
 - the config read / write dispatch (the D3D code cave) and the write wrapper with auto-load
-- config persistence: settings are saved to and loaded from a file
+- config persistence: settings are saved to and loaded from a file (the XBE; the BIOS build keeps
+  them in the X3 EEPROM, see Build)
 - an HDD access fix
 - the X3 3294 clock bug in the year 2020 fixed; the default date is now January 2026 (your own
   settings stay once saved)

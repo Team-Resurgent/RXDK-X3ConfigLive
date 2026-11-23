@@ -145,8 +145,8 @@ jobs:
           body: |
             The Xecuter 3 Config Live app rebuilt with RXDK.
 
-            - `ConfigLive.xbe`: Config Live as a normal XBE, to run from the hard drive or xemu
-            - `X3_ConfigLive_2MB.bin`: the X3 3294 BIOS with this Config Live in its flash slot (only that slot differs from the stock image)
+            - `ConfigLive.xbe`: Config Live as a normal XBE, to run from the hard drive or xemu; settings are kept in `E:\x3config.bin`
+            - `X3_ConfigLive_2MB.bin`: the X3 3294 BIOS with the BIOS build of Config Live in its flash slot (only that slot differs from the stock image); settings are kept by the X3 BIOS itself, so the boot animation and autostart settings take effect
 
             The BIOS image has not been boot-tested on hardware yet. Flash it at your own risk, and keep a known-good bank.
           files: |

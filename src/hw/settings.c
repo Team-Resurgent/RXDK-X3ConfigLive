@@ -14,12 +14,68 @@
 #define STR_UNKNOWN_BANK ("<unknown>")
 #define STR_X3_URL ("www.teamxecuter.com")
 
+static int __stdcall X3CfgStore(u32 id, const void *value);
+
+#ifdef X3_BIOS_BUILD
+/* The BIOS build (Config Live in the X3 BIOS's flash slot) keeps the settings where the X3
+ * kernel keeps them, as 3294 did: the kernel reads them at boot (startup animation, autostart,
+ * ...), so a setting kept only in E:\x3config.bin never takes effect. 3294's InstallConfigDispatch
+ * took the kernel's config get / set from its export table (entries 0x18F / 0x190, i.e.
+ * ordinals 400 / 401); set(0x13) commits. The kernel knows ids 0..0x36: id 0x37 (R3mux LCD
+ * contrast, new in this rebuild) stays in E:\x3config.bin, written at a commit once it changed.
+ * Without those exports (not an X3 kernel) everything goes to the file, as the XBE build. */
+typedef int(__stdcall *X3KernelCfgFn)(u32 id, void *value);
+static X3KernelCfgFn s_kernel_cfg_get, s_kernel_cfg_set;
+static u8 s_file_dirty;
+
+static int X3KernelConfigExports(void)
+{
+    const u8 *base = (const u8 *)0x80010000;
+    const u8 *pe = base + *(const u32 *)(base + 0x3C);
+    u32 dir = *(const u32 *)(pe + 0x78);
+    if (!dir || *(const u32 *)(base + dir + 0x14) <= 0x190) /* NumberOfFunctions */
+        return 0;
+    const u32 *funcs = (const u32 *)(base + *(const u32 *)(base + dir + 0x1C));
+    if (!funcs[0x18F] || !funcs[0x190])
+        return 0;
+    s_kernel_cfg_get = (X3KernelCfgFn)(base + funcs[0x18F]);
+    s_kernel_cfg_set = (X3KernelCfgFn)(base + funcs[0x190]);
+    return 1;
+}
+
+static int __stdcall X3CfgReadBios(u32 id, void *value)
+{
+    return id == X3CFG_LCD_CONTRAST ? X3CfgRead(id, value) : s_kernel_cfg_get(id, value);
+}
+
+static int __stdcall X3CfgWriteBios(u32 id, const void *value)
+{
+    if (id == X3CFG_LCD_CONTRAST) {
+        s_file_dirty = 1;
+        return X3CfgStore(id, value);
+    }
+    int r = s_kernel_cfg_set(id, (void *)value);
+    if (id == X3CFG_COMMIT && s_file_dirty) {
+        s_file_dirty = 0;
+        X3CfgWrite(id, value);
+    }
+    return r;
+}
+#endif
+
 /* InstallConfigDispatch (0x38B40, a 4026 patch): points the config read / write dispatch at the
- * file-backed storage below (originally a code cave in the D3D section) and loads it. */
+ * file-backed storage below (originally a code cave in the D3D section) and loads it. The BIOS
+ * build uses the X3 kernel's config instead (see above). */
 void __cdecl InstallConfigDispatch(void)
 {
     g_pfn_config_read = (void *)&X3CfgRead;
     g_pfn_config_write = (void *)&X3CfgWrite;
+#ifdef X3_BIOS_BUILD
+    if (X3KernelConfigExports()) {
+        g_pfn_config_read = (void *)&X3CfgReadBios;
+        g_pfn_config_write = (void *)&X3CfgWriteBios;
+    }
+#endif
     X3CfgLoad();
 }
 
