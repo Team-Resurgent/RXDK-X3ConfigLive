@@ -69,7 +69,7 @@ not an X3 setting, so it stays in `E:\x3config.bin`. Without the X3 kernel's set
 BIOS build falls back to the file. Only the sources that test `X3_BIOS_BUILD`
 (`src/hw/settings.c`, `src/app/launch.c`) are compiled twice.
 
-Every push to `main` builds on GitHub Actions (Windows, Linux and macOS) and publishes both files
+Every push to `main` builds on GitHub Actions (Windows) and publishes both files
 as the rolling `latest` release; a `v*` tag makes a fixed release. `RX_OUT=<dir>` builds
 somewhere else; `EXTRA_CFLAGS` adds defines, e.g. `EXTRA_CFLAGS=-DRX_TRACE_MAIN ./build.sh`.
 

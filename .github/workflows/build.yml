@@ -1,7 +1,7 @@
 name: Build X3 Config Live
 
-# Builds Config Live against the latest RXDK (clang, SDK, host tools) on Windows, Linux and
-# macOS and packs it into the X3 BIOS image, then publishes the Windows build as the same
+# Builds Config Live against the latest RXDK (clang, SDK, host tools) on Windows (the output is
+# the same from any host) and packs it into the X3 BIOS image, then publishes it as the same
 # rolling "latest" release the RXDK repos use: a push to main deletes and recreates the
 # latest tag so /releases/latest is always this build. A v* tag is a fixed release. workflow_dispatch with release_tag is a
 # prerelease. Pull requests build and upload artifacts, and do not publish.
@@ -28,15 +28,8 @@ concurrency:
 
 jobs:
   build:
-    name: Build (${{ matrix.name }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - {name: Windows, os: windows-latest}
-          - {name: Linux, os: ubuntu-latest}
-          - {name: macOS, os: macos-latest}
+    name: Build
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -51,10 +44,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      # 7-Zip's deflate packs the BIOS: preinstalled on the Windows and Linux runners
-      - name: Install 7-Zip (macOS)
-        if: runner.os == 'macOS'
-        run: brew install sevenzip
+      # 7-Zip's deflate packs the BIOS: preinstalled on the Windows runner
 
       - name: Stage RXDK clang, SDK, and host tools
         shell: pwsh
@@ -77,11 +67,10 @@ jobs:
           mkdir -p dist
           cp out/ConfigLive.xbe out/X3_ConfigLive_2MB.bin dist/
 
-      # every OS builds; the release takes the Windows build
       - name: Upload build
         uses: actions/upload-artifact@v5
         with:
-          name: x3configlive-${{ matrix.name }}
+          name: x3configlive
           path: dist/*
           if-no-files-found: error
           retention-days: 90
@@ -102,7 +91,7 @@ jobs:
       - name: Download build
         uses: actions/download-artifact@v5
         with:
-          name: x3configlive-Windows
+          name: x3configlive
           path: dist
 
       - name: Resolve release tag
