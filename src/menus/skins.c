@@ -97,7 +97,7 @@ void __cdecl DownloadSkin(void)
 
 /* ---------------------------------------------------------------------------------------- */
 /* 0x3DBE0  void __cdecl BuildSkinDownloadMenu(void)  (only referenced)
- * Menu 0x163EAC: downloads x3cl.xboxarchive.org/x3skins.txt to z:\\skins.ini ("Unable to
+ * Menu 0x163EAC: downloads x3.m82a1.xyz/x3skins.txt to z:\\skins.ini ("Unable to
  * download database" / "Unable to open database" entries on failure), frees the old node list,
  * then one SkinNode per "\r\n"-terminated line "name,url"; entry label = name, flags 0x101,
  * callback DownloadSkin with value = &g_skin_node (selected node) and arg = node. A name starting
@@ -116,7 +116,7 @@ void __cdecl BuildSkinDownloadMenu(void)
     char *data, *cur, *sep;
     Menu_ClearItems(g_menu_skindl);
     o = orig_operator_new(0x878);
-    dl = o ? HttpDownload_ctor(o, "x3cl.xboxarchive.org/x3skins.txt" /* "x3cl.xboxarchive.org/x3skins.txt" */,
+    dl = o ? HttpDownload_ctor(o, "http://x3.m82a1.xyz/x3skins.txt",
                                STR_SKINS_INI, 2, 0)
            : 0;
     if (HTTP_DOWNLOAD_OK(dl) == 0) {
